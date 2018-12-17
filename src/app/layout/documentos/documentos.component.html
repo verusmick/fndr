@@ -1,0 +1,422 @@
+<div style="align-content: center">
+    <h2>{{title}}</h2>
+</div>
+
+<!--
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+
+    </div>
+</div>
+
+
+<div class="card-body">
+    <div class="table-responsive">
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="dataTable_length"><label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Show </font></font><select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10</font></font></option><option value="25"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">25</font></font></option><option value="50"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">50</font></font></option><option value="100"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">100</font></font></option></select><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> entradas</font></font></label></div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div id="dataTable_filter" class="dataTables_filter"><label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Buscar:</font></font><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 130px;">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Nombre</font>
+                                    </font>
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 209px;">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Posición</font>
+                                    </font>
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 94px;">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Oficina</font>
+                                    </font>
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 49px;">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Años</font>
+                                    </font>
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 136px;">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Fecha de inicio</font>
+                                    </font>
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 80px;">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Salario</font>
+                                    </font>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Nombre</font>
+                                    </font>
+                                </th>
+                                <th rowspan="1" colspan="1">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Posición</font>
+                                    </font>
+                                </th>
+                                <th rowspan="1" colspan="1">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Oficina</font>
+                                    </font>
+                                </th>
+                                <th rowspan="1" colspan="1">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Años</font>
+                                    </font>
+                                </th>
+                                <th rowspan="1" colspan="1">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Fecha de inicio</font>
+                                    </font>
+                                </th>
+                                <th rowspan="1" colspan="1">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Salario</font>
+                                    </font>
+                                </th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr *ngFor="let document of documentService.documentList">
+                                <td>{{ document.cod_documento }}</td>
+                                <td>{{document.signatura }}</td>
+                                <td>{{document.titulo }}</td>
+                                <td>{{document.fecha }}</td>
+                                <td>{{document.forma_ingreso }}</td>
+                                <td>
+                                    <a class="btn btn-secondary text-white" (click)="onEdit(document)">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger text-white" (click)="onDelete(document.cod_documento)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Mostrando de 1 a 10 de 57 entradas</font>
+                        </font>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Anterior</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="paginate_button page-item active">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">1</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">2</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">3</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">4</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">5</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">6</font>
+                                    </font>
+                                </a>
+                            </li>
+                            <li class="paginate_button page-item next" id="dataTable_next">
+                                <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">Siguiente</font>
+                                    </font>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->
+
+
+
+
+
+
+
+
+<div class="container">
+    <div>
+        <table class="table table-dark table-hover table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Codigo</th>
+                    <th>Signatura</th>
+                    <th>Titulo</th>
+                    <th>Fecha</th>
+                    <th>Ingreso</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let document of documentService.documentList">
+                    <td>{{ document.cod_documento }}</td>
+                    <td>{{document.signatura }}</td>
+                    <td>{{document.titulo }}</td>
+                    <td>{{document.fecha }}</td>
+                    <td>{{document.forma_ingreso }}</td>
+                    <td>
+                        <a class="btn btn-secondary text-white" (click)="onEdit(document)">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a class="btn btn-danger text-white" (click)="onDelete(document.cod_documento)">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="card mt-5">
+
+    <div class="card-body">
+
+        <form #documentForm="ngForm" (ngSubmit)="addDocument(documentForm)">
+            <!-- TO UPDATE -->
+            <input type="hidden" name="cod_documento" #cod_documento="ngModel" [(ngModel)]="documentService.selectedDocument.cod_documento">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="sel1">Dirección:</label>
+                    <select class="form-control" id="sel1" placeholder="Seleccione una dirección" title="Some placeholder text...">
+              <option value="GGS" >GGS</option>
+              <option value="GGS-SI" >GGS-SI</option>
+              <option value="GGS-RH" >GGS-RH</option>
+              <option value="GGS-PG" >GGS-PG</option>
+              <option value="GGS-AD" >GGS-AD</option>
+              <option value="GGS-AD-ARC" >GGS-AD-ARC</option>
+              <option value="GGS-AD-ALM">GGS-AD-ALM</option>
+              <option value="GGS-AD-ACT" >GGS-AD-ACT</option>
+            </select >
+          </div>
+          <div class="col-md-2 offset-md-2">
+              <label for="sel1">Año:</label>
+              <select class="form-control" id="sel1"  placeholder="Seleccione una dirección"  title="Some placeholder text...">
+                <option value="2018" >2018</option>
+                <option value="2017" >2017</option>
+                <option value="2016" >2016</option>
+                <option value="2015" >2015</option>
+                <option value="2014" >2014</option>
+              </select >
+            </div>
+            <div class="col-md-3 offset-md-2">
+                <label>Unidad documental:</label>
+                <input
+            type="text"
+            class="form-control"
+            name="Unidad documental"
+            placeholder="0001"
+            disabled>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+
+
+              <div class="col-md-2">
+                  <label for="sel1">Gerencia:</label>
+                  <select class="form-control" id="sel1" name="gerencia" #gerencia="ngModel"
+                  [(ngModel)]="documentService.selectedDocument.cod_archivo" >
+                    <option value="DE " >DE </option>
+                    <option value="GGS" >GGS</option>
+                    <option value="GOP" >GOP</option>
+                    <option value="GEF" >GEF</option>
+
+                  </select >
+              </div>
+
+              <div class="col-md-2">
+                  <label for="sel1">Prueba:</label>
+                  <select class="form-control" id="sel1"
+                  name="gerencia"
+                  #gerencia="ngModel"
+                  [(ngModel)]="documentService.selectedDocument.cod_archivo">
+                  <option *ngFor="let gerencia of documentService.selectedDocument.cod_archivo" value= {{documentService.selectedDocument.cod_documento}}>
+                    {{gerencia.cod_archivo}}
+                  </option>
+                </select>
+                </div>
+
+
+                <div class="col-md-10">
+                    <label for="sel1">Signatura:</label>
+                    <input type="text" class="form-control" name="signatura" #signatura="ngModel" [(ngModel)]="documentService.selectedDocument.signatura" placeholder="CGS-AD-ARC-2010-001" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sel1">Título:</label>
+                <input type="text" class="form-control" name="titulo" #titulo="ngModel" [(ngModel)]="documentService.selectedDocument.titulo" placeholder="Lista de series (Corespondencia Interna)" />
+            </div>
+            <div class="form-group">
+                <label for="sel1">Niv Descripción</label>
+                <select class="form-control" id="sel1">
+              <option value="" >Unidad Documental simple/Documento</option>
+              <option value="0001" >Unidad Documental compuesta/expediente</option>
+              <option value="0001" >Serie</option>
+              <option value="0001" >Subserie</option>
+              <option value="0001" >Fondo</option>
+              <option value="0001" >Subfondo</option>
+            </select >
+          </div>
+          <div class="form-group">
+              <label for="sel1">Volumen</label>
+              <select class="form-control" id="sel1"  >
+                <option value="01" >Folder</option>
+                <option value="0001" >Carpeta</option>
+                <option value="0001" >Empastado</option>
+                <option value="0001" >Archivador de Palanca</option>
+                <option value="0001" >Anillado</option>
+              </select >
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                <label>Fechas:</label>
+                <input
+            type="text"
+            class="form-control"
+            name="fechas"
+            #fechas="ngModel"
+            [(ngModel)]="documentService.selectedDocument.fecha"
+            placeholder="dd/mm/aaaa"
+            />
+              </div>
+
+            <div class="col-md-3 offset-md-2">
+            <label for="sel1">Fecha inicio</label>
+          <input
+            type="date"
+            class="form-control"
+            name="fec_ini"
+            #fec_ini="ngModel"
+            [(ngModel)]="documentService.selectedDocument.fec_ini"
+            placeholder="Add A Location"
+          /></div>
+              <div class="col-md-3 offset-md-1">
+          <label for="sel1">Fecha fin</label>
+          <input
+            type="date"
+            class="form-control"
+            name="fec_fin"
+            #fec_fin="ngModel"
+            [(ngModel)]="documentService.selectedDocument.fec_fin"
+            placeholder="Add A Location"
+          /></div>
+        </div>
+
+        <div class="form-group">
+            <label for="sel1">Forma de Ingreso</label>
+          <input
+            type="text"
+            class="form-control"
+            name="forma_ingreso"
+            #forma_ingreso="ngModel"
+            [(ngModel)]="documentService.selectedDocument.forma_ingreso"
+            placeholder="Transferencia"
+          />
+
+        </div>
+        <div class="form-group">
+            <label for="sel1">Contenido</label>
+          <textarea
+
+            class="form-control"
+            name="contenido"
+            #contenido="ngModel"
+            [(ngModel)]="documentService.selectedDocument.contenido"
+            ></textarea>
+
+        </div>
+        <div class="form-row">
+          <div class="col-md-4">
+            <button class="btn btn-primary" type="submit" (click)="addDocument(documentForm)">
+              <i class="fas fa-plus-circle"></i> Guardar
+            </button>
+          </div>
+          <div class="col-md-4">
+              <button class="btn btn-primary" type="submit">
+                <i class="fas fa-plus-circle"></i> Limpiar
+              </button>
+            </div>
+          <div class="col-md-4">
+            <button
+              class="btn btn-secondary"
+              type="reset"
+              (click)="resetForm(documentForm)"
+            >
+              <i class="fas fa-sync-alt"></i> Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
