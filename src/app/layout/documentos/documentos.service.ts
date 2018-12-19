@@ -15,7 +15,20 @@ export class DocumentService {
   getDocuments() {
     return this.http
       .get(this.URL_API)
-      .subscribe(res => (this.documentList = res as Document[]));
+      .subscribe(res => {
+        console.log(res);
+        (this.documentList = res as Document[])
+      }); 
+  }
+  getDocuments2() {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.URL_API)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err)
+        });
+    });
   }
   insertDocuments(document: Document) {
     return this.http.post(this.URL_API, document);

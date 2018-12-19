@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Subject } from 'rxjs';
 import { NgForm } from '@angular/forms';
 
 // Service
@@ -19,6 +19,9 @@ import { Document } from './documentos';
   styleUrls: ['./documentos.component.scss']
 })
 export class DocumentosComponent implements OnInit {
+  documentList: Document[];
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: any;
   constructor(
     public documentService: DocumentService,
     private toastr: ToastrService
@@ -26,11 +29,48 @@ export class DocumentosComponent implements OnInit {
   public alerts: Array<any> = [];
   public sliders: Array<any> = [];
   title = 'Registro Descentralizado';
- prueba = true;
-  ngOnInit() {
-    this.documentService.getDocuments();
+  tabla = true;
+  formul= false;
+  atras = false;
+  regi = true;
+  ngOnInit(){
+    this.tabla = true;
+    this.formul= false;
+    this.atras = false;
+    this.regi = true;
+    // datatables
+    this.dtTrigger=new Subject();
+    this.dtOptions = {
+      pagingType: 'simple',
+      pageLength: 5
+    };
+    this.documentService.getDocuments2( ).then(Response=>{
+      
+      this.documentList = Response as Document[]
+      this.dtTrigger.next();
+    }) ;  
+  }
+
+
+  formulario(documentForm?: NgForm){
+    this.tabla = false;
+      this.regi = false;
+      this.formul= true;
+      this.atras = true;
+    console.log('hoola');
+    
+  }
+
+  
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
   onEdit(document: Document) {
+    this.tabla = false;
+    this.regi = false;
+    this.formul= true;
+    this.atras = true;
     this.documentService.selectedDocument = document;
   }
   onDelete(cod_documento: number) {
@@ -46,7 +86,7 @@ export class DocumentosComponent implements OnInit {
     this.documentService.getDocuments();
   }
   addDocument(documentForm?: NgForm) {
-    if (documentForm.value.cod_documento === 0) {
+    /*if (documentForm.value.cod_documento === 0) {
       this.documentService
         .insertDocuments(documentForm.value)
         .subscribe(res => {
@@ -54,13 +94,14 @@ export class DocumentosComponent implements OnInit {
           this.resetForm(documentForm);
           this.getDocuments();
         });
-    } else {
+    } else {*/
+
       this.documentService.updateDocument(documentForm.value).subscribe(res => {
         console.log(res);
         this.resetForm(documentForm);
         this.getDocuments();
       });
-    }
+   // }
   }
   editDocument(document: Document) {
     this.documentService.selectedDocument = document;

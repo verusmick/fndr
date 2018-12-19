@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 
 
-// import { DataTablesModule } from 'angular-datatables';
+ import { DataTablesModule } from 'angular-datatables';
 
 
 import { FormsModule} from '@angular/forms';
@@ -23,11 +23,8 @@ import { DocumentosRoutingModule } from './documentos-routing.module';
     NgbCarouselModule,
     FormsModule,
     NgbAlertModule,
-    // DataTablesModule
+     DataTablesModule
 
   ]
-  ,
-  providers: [],
-  bootstrap: [ DocumentosComponent ]
 })
 export class DocumentosModule { }
