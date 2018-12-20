@@ -18,7 +18,7 @@ export class DocumentService {
       .subscribe(res => {
         console.log(res);
         (this.documentList = res as Document[])
-      }); 
+      });
   }
   getDocuments2() {
     return new Promise((resolve, reject) => {
@@ -30,12 +30,25 @@ export class DocumentService {
         });
     });
   }
-  insertDocuments(document: Document) {
-    return this.http.post(this.URL_API, document);
+  insertDocuments(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.URL_API,obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err)
+        });
+    });
   }
-  updateDocument(document: Document) {
-    console.log('service update:', document, 'id:', document.cod_documento);
-    return this.http.put(this.URL_API + '/' + document.cod_documento, document);
+  updateDocument(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.URL_API + '/' + obj.cod_documento, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err)
+        });
+    });
   }
   deleteDocument(cod_documento: number) {
     console.log(cod_documento);

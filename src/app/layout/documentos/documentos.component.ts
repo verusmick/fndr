@@ -22,6 +22,8 @@ export class DocumentosComponent implements OnInit {
   documentList: Document[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: any;
+  editMode:any;
+
   constructor(
     public documentService: DocumentService,
     private toastr: ToastrService
@@ -45,28 +47,32 @@ export class DocumentosComponent implements OnInit {
       pageLength: 5
     };
     this.documentService.getDocuments2( ).then(Response=>{
-      
       this.documentList = Response as Document[]
       this.dtTrigger.next();
-    }) ;  
+    });
   }
 
 
   formulario(documentForm?: NgForm){
+    this.resetForm();
+    this.editMode = false;
+
     this.tabla = false;
       this.regi = false;
       this.formul= true;
       this.atras = true;
     console.log('hoola');
-    
   }
 
-  
+
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
   onEdit(document: Document) {
+    this.resetForm();
+    this.editMode = true;
+
     this.tabla = false;
     this.regi = false;
     this.formul= true;
@@ -86,6 +92,19 @@ export class DocumentosComponent implements OnInit {
     this.documentService.getDocuments();
   }
   addDocument(documentForm?: NgForm) {
+    if(!this.editMode){
+      this.documentService
+        .insertDocuments(this.documentService.selectedDocument)
+        .then(response => {
+          console.log(response);
+        });
+    }else{
+      this.documentService
+        .updateDocument(this.documentService.selectedDocument)
+        .then(response => {
+          console.log(response);
+        });
+    }
     /*if (documentForm.value.cod_documento === 0) {
       this.documentService
         .insertDocuments(documentForm.value)
@@ -96,11 +115,11 @@ export class DocumentosComponent implements OnInit {
         });
     } else {*/
 
-      this.documentService.updateDocument(documentForm.value).subscribe(res => {
-        console.log(res);
-        this.resetForm(documentForm);
-        this.getDocuments();
-      });
+      // this.documentService.updateDocument(documentForm.value).subscribe(res => {
+      //   console.log(res);
+      //   this.resetForm(documentForm);
+      //   this.getDocuments();
+      // });
    // }
   }
   editDocument(document: Document) {
@@ -114,10 +133,8 @@ export class DocumentosComponent implements OnInit {
       });
     }
   }
+
   resetForm(documentForm?: NgForm) {
-    if (documentForm != null) {
-      documentForm.reset();
-      this.documentService.selectedDocument = new Document();
-    }
+    this.documentService.selectedDocument = new Document();
   }
 }

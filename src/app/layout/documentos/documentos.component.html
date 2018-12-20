@@ -51,11 +51,12 @@
     </div>
 </div>
 
+<!--forms-->
 <div class="card mt-5">
 
     <div class="card-body" *ngIf="formul">
 
-        <form #documentForm="ngForm" (ngSubmit)="addDocument(documentForm)">
+        <form #documentForm="ngForm">
             <!-- TO UPDATE -->
             <input type="hidden" name="cod_documento" #cod_documento="ngModel" [(ngModel)]="documentService.selectedDocument.cod_documento">
             <div class="row">
@@ -104,13 +105,13 @@
                     <option value="GGS" >GGS</option>
                     <option value="GOP" >GOP</option>
                     <option value="GEF" >GEF</option>
-                   
+
                   </select >
               </div>
 
              <!-- <div class="col-md-2">
                   <label for="sel1">Prueba:</label>
-                  <select class="form-control" id="sel1" 
+                  <select class="form-control" id="sel1"
                   name="gerencia"
                   #gerencia="ngModel"
                   [(ngModel)]="documentService.selectedDocument.cod_archivo">
@@ -152,7 +153,7 @@
                 <option value="0001" >Anillado</option>
               </select >
             </div>
-            
+
             <div class="row">
                 <div class="col-md-3">
                 <label>Fechas:</label>
@@ -187,7 +188,7 @@
             placeholder="Add A Location"
           /></div>
         </div>
-      
+
         <div class="form-group">
             <label for="sel1">Forma de Ingreso</label>
           <input
@@ -198,12 +199,12 @@
             [(ngModel)]="documentService.selectedDocument.forma_ingreso"
             placeholder="Transferencia"
           />
-    
+
         </div>
         <div class="form-group">
             <label for="sel1">Contenido</label>
           <textarea
-         
+
             class="form-control"
             name="contenido"
             #contenido="ngModel"
@@ -213,7 +214,7 @@
         </div>
         <div class="form-row">
           <div class="col-md-4">
-            <button class="btn btn-primary" type="submit" (click)="addDocument(documentForm)">
+            <button class="btn btn-primary"  (click)="addDocument(documentForm)">
               <i class="fas fa-plus-circle"></i> Guardar
             </button>
           </div>
