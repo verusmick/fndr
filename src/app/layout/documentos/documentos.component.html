@@ -55,14 +55,17 @@
 <div class="card mt-5">
 
     <div class="card-body" *ngIf="formul">
-
-        <form #documentForm="ngForm">
             <!-- TO UPDATE -->
             <input type="hidden" name="cod_documento" #cod_documento="ngModel" [(ngModel)]="documentService.selectedDocument.cod_documento">
             <div class="row">
                 <div class="col-md-3">
-                    <label for="sel1">Dirección:</label>
-                    <select class="form-control" id="sel1" placeholder="Seleccione una dirección" title="Some placeholder text...">
+                    <label for="sel333">Dirección:</label>
+                    <select class="form-control"
+                            id="sel333"
+                            [(ngModel)]="direction"
+                            (change)="changForSignature()"
+                            placeholder="Seleccione una dirección"
+                            title="Some placeholder text...">
               <option value="GGS" >GGS</option>
               <option value="GGS-SI" >GGS-SI</option>
               <option value="GGS-RH" >GGS-RH</option>
@@ -75,7 +78,11 @@
           </div>
           <div class="col-md-2 offset-md-2">
               <label for="sel1">Año:</label>
-              <select class="form-control" id="sel1"  placeholder="Seleccione una dirección"  title="Some placeholder text...">
+              <select class="form-control" id="sel1"
+                      [(ngModel)]="year"
+                      (change)="changForSignature()"
+                      placeholder="Seleccione una dirección"
+                      title="Some placeholder text...">
                 <option value="2018" >2018</option>
                 <option value="2017" >2017</option>
                 <option value="2016" >2016</option>
@@ -90,6 +97,7 @@
             class="form-control"
             name="Unidad documental"
             placeholder="0001"
+            [(ngModel)]="documentalUnity"
             disabled>
               </div>
             </div>
@@ -233,6 +241,6 @@
             </button>
           </div>
         </div>
-      </form>
+
     </div>
   </div>

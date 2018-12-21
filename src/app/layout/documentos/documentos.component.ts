@@ -22,12 +22,17 @@ export class DocumentosComponent implements OnInit {
   documentList: Document[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: any;
-  editMode:any;
+  editMode: any;
+  direction: any;
+  year: any;
+  documentalUnity: any;
 
   constructor(
     public documentService: DocumentService,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.documentalUnity='0001';
+  }
   public alerts: Array<any> = [];
   public sliders: Array<any> = [];
   title = 'Registro Descentralizado';
@@ -52,6 +57,9 @@ export class DocumentosComponent implements OnInit {
     });
   }
 
+  changForSignature(){
+    this.documentService.selectedDocument.signatura = `${this.direction ? this.direction : ''}${this.year ? '-' + this.year : ''}${this.documentalUnity ? '-' + this.documentalUnity : ''}`;
+  }
 
   formulario(documentForm?: NgForm){
     this.resetForm();
