@@ -90,10 +90,12 @@ export class DocumentosComponent implements OnInit {
   onDelete(cod_documento: number) {
     if (confirm('Are you sure ?')) {
       this.documentService.deleteDocument(cod_documento).subscribe(res => {
-        console.log(res);
-        this.documentService.getDocuments();
+        this.documentList = [];
+        this.tabla = false;
+        setTimeout(() => {
+          this.ngOnInit();
+        }, 100);
       });
-      this.toastr.success('Successfull Operation', ' Deleted');
     }
   }
   getDocuments() {
