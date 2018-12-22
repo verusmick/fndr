@@ -106,12 +106,14 @@ export class DocumentosComponent implements OnInit {
         .insertDocuments(this.documentService.selectedDocument)
         .then(response => {
           console.log(response);
+          this.ngOnInit();
         });
     }else{
       this.documentService
         .updateDocument(this.documentService.selectedDocument)
         .then(response => {
           console.log(response);
+          this.ngOnInit();
         });
     }
     /*if (documentForm.value.cod_documento === 0) {
