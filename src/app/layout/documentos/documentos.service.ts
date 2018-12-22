@@ -10,7 +10,7 @@ export class DocumentService {
   // productList: Product[];
   documentList: Document[];
   selectedDocument: Document = new Document();
-  URL_API = 'http://localhost:3000/apifndr/documentos';
+  URL_API = 'http://192.168.0.16:3000/apifndr/documentos';
   constructor(private http: HttpClient) {}
   getDocuments() {
     return this.http

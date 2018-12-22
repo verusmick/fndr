@@ -100,6 +100,7 @@ export class DocumentosComponent implements OnInit {
     this.documentService.getDocuments();
   }
   addDocument(documentForm?: NgForm) {
+    this.parseBeforeSave();
     if(!this.editMode){
       this.documentService
         .insertDocuments(this.documentService.selectedDocument)
@@ -130,6 +131,14 @@ export class DocumentosComponent implements OnInit {
       // });
    // }
   }
+  // todo: workaround db fix
+  parseBeforeSave() {
+    this.documentService.selectedDocument['cod_archivo']=1;
+    this.documentService.selectedDocument['cod_volumen']=1;
+    this.documentService.selectedDocument['cod_nivel_descripcion']=1;
+    this.documentService.selectedDocument['cod_unidad_org']=1;
+  }
+
   editDocument(document: Document) {
     this.documentService.selectedDocument = document;
   }
