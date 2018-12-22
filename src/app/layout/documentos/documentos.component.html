@@ -7,7 +7,7 @@
 
 
 <div class="card-header" *ngIf="regi">
-    <button class="btn btn-primary" type="submit" (click)="formulario(documentForm)">
+    <button class="btn btn-primary" type="submit" (click)="formulario()">
      Registrar
   </button>
 </div>
@@ -222,7 +222,7 @@
         </div>
         <div class="form-row">
           <div class="col-md-4">
-            <button class="btn btn-primary"  (click)="addDocument(documentForm)">
+            <button class="btn btn-primary"  (click)="addDocument()">
               <i class="fas fa-plus-circle"></i> Guardar
             </button>
           </div>
@@ -235,7 +235,7 @@
             <button
               class="btn btn-secondary"
               type="reset"
-              (click)="resetForm(documentForm)"
+              (click)="resetForm()"
             >
               <i class="fas fa-sync-alt"></i> Cancelar
             </button>
